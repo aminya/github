@@ -11,7 +11,7 @@ module.exports = {
   ],
   presets: [
     ["@babel/preset-env", {
-      targets: {electron: process.versions.electron || process.env.ELECTRON_VERSION}
+      targets: {electron: process.versions.electron || process.env.ELECTRON_VERSION || 6}
     }],
     "@babel/preset-react"
   ],

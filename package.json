@@ -1,6 +1,6 @@
 {
   "name": "github",
-  "main": "./lib/index",
+  "main": "./dist/index.js",
   "version": "0.35.0",
   "description": "GitHub integration",
   "repository": "https://github.com/atom/github",
@@ -16,7 +16,10 @@
     "lint": "eslint --max-warnings 0 test lib",
     "fetch-schema": "node script/fetch-schema",
     "relay": "relay-compiler --src ./lib --schema graphql/schema.graphql",
-    "postinstall": "node script/redownload-electron-bins.js"
+    "postinstall": "node script/redownload-electron-bins.js",
+    "dev": "cross-env NODE_ENV=development parcel watch --target main lib/index.js",
+    "build": "cross-env NODE_ENV=production parcel build --target main lib/index.js",
+    "build-commit": "build-commit -o dist"
   },
   "engines": {
     "atom": ">=1.37.0"
@@ -38,6 +41,17 @@
       }
     }
   ],
+  "targets": {
+    "main": {
+      "context": "electron-renderer",
+      "engines": {
+        "electron": ">=5.x"
+      },
+      "includeNodeModules": false,
+      "outputFormat": "commonjs",
+      "isLibrary": true
+    }
+  },
   "dependencies": {
     "@atom/babel-plugin-chai-assert-async": "1.0.0",
     "@atom/babel7-transpiler": "1.0.0-1",
@@ -106,7 +120,10 @@
     "relay-compiler": "5.0.0",
     "semver": "6.3.0",
     "sinon": "9.0.3",
-    "test-until": "1.1.1"
+    "test-until": "1.1.1",
+    "parcel": "^2.0.0-beta.1",
+    "cross-env": "^7",
+    "build-commit": "0.1.1"
   },
   "consumedServices": {
     "status-bar": {

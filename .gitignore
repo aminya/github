@@ -7,3 +7,4 @@ spec/fixtures/b/
 .nyc_output/
 coverage/
 test-results/
+.parcel-cache
