@@ -10,8 +10,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-18.04, macos-10.14, windows-latest]
-        # channel: [stable, beta, nightly]
-        channel: [nightly]
+        channel: [beta, nightly]
       fail-fast: false
     runs-on: ${{ matrix.os }}
     env:
@@ -24,7 +23,7 @@ jobs:
       uses: UziTech/action-setup-atom@v1
       with:
         channel: ${{ matrix.channel }}
-        
+
     - name: install windows build tools
       if: contains(matrix.os, 'windows')
       run: |
